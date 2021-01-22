@@ -1,44 +1,95 @@
 public class SnakeAndLadder {
-	 public static final int IS_LADDER = 1;
-    public static final int IS_SNAKE = 2;
-	 public static void main(String[] args) {
-		 System.out.println("WELCOME TO SNAKE AND LADDER GAME");
-		 int startingPos=0;
-	    int currentPos=0;
-	    int play;
-	    int dice;
-	    int count1=0;
-	    System.out.println("Player is Starting at: " + startingPos);
-	    while (currentPos != 100) {
-	    	count1++;
-	    	dice = (int) ((Math.floor(Math.random() * 10) % 6) + 1);
-	    	System.out.println("Current Dice Face is: " + dice);
-	    	play = (int) ((Math.floor(Math.random() * 10) % 3));
-	    	switch (play) {
-        		case IS_LADDER:
-        			currentPos += dice;
-        			break;
-        		case IS_SNAKE:
-        			currentPos -= dice;
-        			break;
-        		default:
-        			currentPos+=0;
-        			break;
-	    	}
-	    	if (currentPos == 100) {
-	    		System.out.println("New Position is: " + currentPos);
-                break;
-            } else if (currentPos > 100) {
-                currentPos -= dice;
-                System.out.println("Its not valid and staying at same position.");
-            } else if (currentPos < 0) {
-                currentPos = startingPos; // Starting from zero again.
-                System.out.println("Back to start again");
-            } else {
-                System.out.println("New Position is: " + currentPos);
-            }
-	    }
-        System.out.println("You Won the Game!!! and took "+ count1 + " Plays of dice to win ");
-	}
 
+        public static int position_of_player1=0;
+        public static int position_of_player2=0;
+        public static int no_of_die_rolls=0;
+        public static int die_value;
+        public static int values=0;
+
+        public static int dieRoll()
+        {
+                int die_value=(int)(Math.random()*6)+1;
+                return die_value;
+        }
+
+        public static int play(int value)
+        {
+                values=value;
+                if (values<100)
+                {
+                    die_value = dieRoll();
+                    no_of_die_rolls=no_of_die_rolls+1;
+                    System.out.println("DieValue:" + die_value);
+                    int option = (int) (Math.random() * 10) % 3;
+                    switch (option) {
+                        case 0:
+                            break;
+
+                        case 1:
+                            ladder();
+                            break;
+
+                        case 2:
+                            snake();
+                            break;
+
+                        default:
+                            System.out.println("Something Unexpected Happen !!");
+
+                    }
+                }
+                return values;
+        }
+
+        public static void ladder()
+        {
+            System.out.println("Ladder");
+            if (values+die_value<100)
+            {
+                values=values+die_value;
+
+                if (values<100)
+                {
+                    die_value=dieRoll();
+
+                    if (values+die_value<=100)
+                    {
+                        values=values+die_value;
+                    }
+
+                }
+            }
+        }
+
+        public static void snake()
+        {
+            System.out.println("Snake");
+            if (values>die_value && values>0)
+            {
+                values=values-die_value;
+            }
+            else {
+                values=0;
+            }
+        }
+
+        public static void main(String args[])
+        {
+                System.out.println("WELCOME TO SNAKE AND LADDER GAME");
+                SnakeAndLadder game = new SnakeAndLadder();
+
+                while (position_of_player1<100 && position_of_player2<100) {
+                    position_of_player1 = game.play(position_of_player1);
+                    System.out.println("Number Of Die Roll :" + no_of_die_rolls + "\tPosition of Player1 :" + position_of_player1);
+
+                    position_of_player2 = game.play(position_of_player2);
+                    System.out.println("Number Of Die Roll :" + no_of_die_rolls  + "\tPosition of Player2 :" + position_of_player2);
+                }
+
+                if(position_of_player1==100) {
+                    System.out.println("Player 1 is Winner");
+                }else {
+                    System.out.println("Player 2 is Winner");
+                }
+        }
 }
