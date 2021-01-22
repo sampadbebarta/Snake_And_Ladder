@@ -1,21 +1,28 @@
 public class SnakeAndLadder {
-
-        //uc1_single player at start position 0;
-        public static int position_of_player1=0;
-
-        //uc2_Player Rolls The Die;
-        public static void dieRoll()
-        {
-                int die_value=(int)(Math.random()*6)+1;
-                System.out.println("DieValue:"+die_value);
-        }
-
-        public static void main(String args[])
-        {
-            System.out.println("WELCOME TO SNAKE AND LADDER GAME");
-            SnakeAndLadder obj1=new SnakeAndLadder();
-            obj1.dieRoll();
-        }
-
+	public static final int IS_LADDER = 1;
+   public static final int IS_SNAKE = 2;
+	public static void main(String[] args) {
+	System.out.println("WELCOME TO SNAKE AND LADDER GAME");
+	int startingPos=0;
+	int currentPos=0;
+	int play;
+	int dice;
+	System.out.println("Player is Starting at: " + startingPos);
+	dice = (int) ((Math.floor(Math.random() * 10) % 6) + 1);
+   System.out.println("Current Dice Face is: " + dice);
+   play = (int) ((Math.floor(Math.random() * 10) % 3));
+   switch (play) {
+     case IS_LADDER:
+        currentPos += dice;
+        break;
+     case IS_SNAKE:
+        currentPos -= dice;
+        break;
+     default:
+        currentPos+=0;
+        break;
+    	}
+   System.out.println("New Position is: " + currentPos);
+	}
 
 }
