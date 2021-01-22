@@ -2,7 +2,7 @@ public class SnakeAndLadder {
 	 public static final int IS_LADDER = 1;
     public static final int IS_SNAKE = 2;
 	 public static void main(String[] args) {
-		 System.out.println("WELCOME TO SNAKE AND LADDER GAME");
+		 System.out.println("-----------Welcome to Snake And Ladder Problem---------");
 		 int startingPos=0;
 	    int currentPos=0;
 	    int play;
@@ -24,6 +24,7 @@ public class SnakeAndLadder {
         			break;
 	    	}
 	    	if (currentPos == 100) {
+	    		System.out.println("New Position is: " + currentPos);
                 break;
             } else if (currentPos > 100) {
                 currentPos -= dice;
@@ -35,7 +36,7 @@ public class SnakeAndLadder {
                 System.out.println("New Position is: " + currentPos);
             }
 	    }
-        System.out.println("You are Winner!!!");
+        System.out.println("You Won the Game!!!");
 	}
 
 }
